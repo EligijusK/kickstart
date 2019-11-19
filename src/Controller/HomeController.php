@@ -13,12 +13,9 @@ class HomeController extends AbstractController
      */
     public function index(Request $request)
     {
-        return $this->render('home/index.html.twig', [
-            'someVariable' => [
-                $request->get('student', 'nežinau'),
-                'darius',
-                'petras',
-            ],
-        ]);
+        $data = file_get_contents("students.json");
+        $teams = json_decode($data, true);
+
+        return $this->render('home/index.html.twig', ["teams" => $teams]);
     }
 }
